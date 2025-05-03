@@ -18,6 +18,9 @@ static void on_destroy_effect_runtime(reshade::api::effect_runtime* runtime)
     screenshot::on_destroy_effect_runtime(runtime);
 }
 
+extern "C" __declspec(dllexport) const char* NAME = "KK Reshade";
+extern "C" __declspec(dllexport) const char* DESCRIPTION = "Facilitates interaction between Reshade and KK/KKS/HS2/AI";
+
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
 {
     switch (ul_reason_for_call)
