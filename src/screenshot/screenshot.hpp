@@ -3,7 +3,7 @@
 #include <reshade.hpp>
 
 #define COLOR_CHANNELS 4
-#define MAX_IMAGE_SIZE (3840 * 2160 * COLOR_CHANNELS)
+#define MAX_IMAGE_SIZE (7680 * 4320 * COLOR_CHANNELS)
 
 namespace screenshot
 {
