@@ -21,27 +21,26 @@ static void on_destroy_effect_runtime(reshade::api::effect_runtime* runtime)
 extern "C" __declspec(dllexport) const char* NAME = "KK Reshade";
 extern "C" __declspec(dllexport) const char* DESCRIPTION = "Facilitates interaction between Reshade and KK/KKS/HS2/AI";
 
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
     switch (ul_reason_for_call)
     {
-    case DLL_PROCESS_ATTACH:
-        if (!reshade::register_addon(hModule))
-            return FALSE;
-        reshade::register_event<reshade::addon_event::init_effect_runtime>(&on_init_effect_runtime);
-        reshade::register_event<reshade::addon_event::reshade_finish_effects>(&on_reshade_finish_effects);
-        reshade::register_event<reshade::addon_event::destroy_effect_runtime>(&on_destroy_effect_runtime);
+        case DLL_PROCESS_ATTACH:
+            if (!reshade::register_addon(hModule)) return FALSE;
+            reshade::register_event<reshade::addon_event::init_effect_runtime>(&on_init_effect_runtime);
+            reshade::register_event<reshade::addon_event::reshade_finish_effects>(&on_reshade_finish_effects);
+            reshade::register_event<reshade::addon_event::destroy_effect_runtime>(&on_destroy_effect_runtime);
 
-        screenshot::start();
-        break;
-    case DLL_PROCESS_DETACH:
-        reshade::unregister_event<reshade::addon_event::init_effect_runtime>(&on_init_effect_runtime);
-        reshade::unregister_event<reshade::addon_event::reshade_finish_effects>(&on_reshade_finish_effects);
-        reshade::unregister_event<reshade::addon_event::destroy_effect_runtime>(&on_destroy_effect_runtime);
-        reshade::unregister_addon(hModule);
+            screenshot::start();
+            break;
+        case DLL_PROCESS_DETACH:
+            reshade::unregister_event<reshade::addon_event::init_effect_runtime>(&on_init_effect_runtime);
+            reshade::unregister_event<reshade::addon_event::reshade_finish_effects>(&on_reshade_finish_effects);
+            reshade::unregister_event<reshade::addon_event::destroy_effect_runtime>(&on_destroy_effect_runtime);
+            reshade::unregister_addon(hModule);
 
-        screenshot::stop();
-        break;
+            screenshot::stop();
+            break;
     }
     return TRUE;
 }
