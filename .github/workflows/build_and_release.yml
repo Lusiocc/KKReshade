@@ -71,7 +71,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: KKReshade.addon
-
+  
     - name: Update Nightly Release
       uses: softprops/action-gh-release@v1
       with:
@@ -80,5 +80,6 @@ jobs:
         files: KKReshade.addon
         draft: false
         prerelease: true
+        overwrite: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
