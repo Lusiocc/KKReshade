@@ -72,14 +72,23 @@ jobs:
       with:
         name: KKReshade.addon
   
+    - name: Delete older nightly release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        gh release delete nightly --cleanup-tag --yes || echo "Nightly release not found"
+
     - name: Update Nightly Release
       uses: softprops/action-gh-release@v1
       with:
         tag_name: nightly
         name: Nightly Build
+        body: |
+          Nightly build of KKReshade
+          Commit: ${{ github.sha }}
+        generate_release_notes: true
         files: KKReshade.addon
         draft: false
         prerelease: true
-        overwrite: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
