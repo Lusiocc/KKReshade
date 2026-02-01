@@ -54,6 +54,7 @@ jobs:
       with:
         tag_name: ${{ github.event_name == 'workflow_dispatch' && inputs.version_tag || '' }}
         files: KKReshade.addon
+        generate_release_notes: true
         draft: false
         prerelease: false
       env:
