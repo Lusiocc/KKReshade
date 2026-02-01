@@ -76,7 +76,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        gh release delete nightly --cleanup-tag --yes || echo "Nightly release not found"
+        gh release delete nightly --cleanup-tag --yes --repo ${{ github.repository }} || echo "Nightly release not found"
 
     - name: Update Nightly Release
       uses: softprops/action-gh-release@v1
